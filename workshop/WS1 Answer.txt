@@ -1,0 +1,57 @@
+Question 1
+1)a)
+This question might seem complicated, but is in fact just a tree where the root node is 1, it's children are 2 and 3, the next row is 4,5,6,7, and the last row is 8,9,10,11,12,13,14
+
+1)b)
+Breadth first checks nodes in order 1,2,3,4,5,6,7,8,9,10,11, stopping once it finds the goal node of 11
+Depth-Limited is just depth first search, order is 1,2,4,8,9,5,10,11
+The "Limited" part is so that it stops after going down 3 times, otherwise it will theoretically continue forever as a tree built with a successor function like this one will continue infinitely, so depth first with no limit will go 1,2,4,8,16,32,64...... Never reaching 11
+
+Iterative deepening does depth limited search at each level of the tree, increasing the limit each time the goal node is not found, so with a starting limit of 0 the order is:
+
+1,1,2,3,1,2,4,5,3,6,7,1,2,4,8,9,5,10,11
+
+Bidirectional starts at both root node and goal node and finds the path between them.
+
+For best efficiency, you usually want to use a combination of algorithms, such as breadth first from the root node, and depth first from the goal node.
+
+Root node order might be 1,2
+Goal node: 11,5,2
+
+Intersect at 2, path found
+
+Note that while bidirectional search is more efficient for both time and space complexity, it requires you to have access to the goal node from the start (not just root node) and requires each node to have a pointer/connection to both its parent and children (not just children)
+
+Question 2:
+
+Lugoj, Mehadia, Dobreta, Craiova, Timisoara, Pitesti, Bucharest
+
+Important to note that A* checks Timisoara node to ensure the optimal path is found, as a straight line from Timisoara would hypothetically be faster than from Pitesti (taking the convoluted route from Lugoj to Pitesti into account)
+
+Question 3:
+
+Optimal for range W=0 to 1 inclusive
+
+W=0 is uniform cost search, no heuristic being considered
+
+W=1 is A* search, both heuristic and path cost being considered
+
+W=2 is Greedy Search, only heuristic (estimated distance remaining to goal from a node) is being considered
+
+Question 4:
+a) State space is number of directions (4) times number of positions (infinite) thus infinite
+
+b) when only considering intersections, state space reduced to 4*Number of intersections (there is a map, you can count number of intersections in it if you really want but I'm not going to)
+
+c) if the robot does not need to turn when changing direction, orientation no longer matters, state space reduced by four, to now be = 1*Number of directions
+
+d) Path and Heuristic costs can both be:
+Euclidean distance (straight line from start/to goal)
+Manhattan distance (grid based distance from start/to goal)
+Manhattan the better choice as robot can only move in grid directions anyway and requires slightly less computation
+
+d2) Assumptions include (but are not limited to):
+Robot able to move/turn precisely
+2D map of maze represents 3D World, e.g. ground is flat and not sloped
+Robot's position can be tracked accurately
+Robot has to go through maze (optimal path would otherwise be to go around the maze to reach endpoint)
